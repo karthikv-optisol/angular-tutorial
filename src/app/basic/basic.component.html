@@ -1,0 +1,32 @@
+<div class="container w-75 mx-auto px-4">
+  <a href="/products">Products Page</a>
+  <h1>Pipes</h1>
+  <!-- short,longDate,fullDate,medium -->
+  <h2>Date pipe {{today|date:'short'}}</h2>
+  <h3>Lower Pipe {{title|lowercase}}</h3>
+  <h1>{{title|uppercase}}</h1>
+  <button class="bg-pink-500 text-white px-4 py-2 rounded capitalize" (click)="clicked()">title change</button>
+  <br /><br />
+  <div>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="Increment()">Increment</button>
+    {{count}}
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="Descrement()">Decrement</button>
+  </div>
+  <br /><br />
+  <input class="border-2 border-blue-600 rounded py-2 px-4" [(ngModel)]="name" #ctrl="ngModel" required>
+  <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="addName()">ADD</button>
+  <br />
+  <span style="color:red">{{this.error}}</span>
+  Disable listing :
+  <input type="checkbox" name="" id="" [(ngModel)]="disable">
+  <!-- <ul>
+        <li *ngFor="let nam of names; let i = index" (click)="editname(nam)">{{nam.name}}</li>
+    </ul> -->
+ 
+  <app-testing *ngIf="!disable" [testing]="names"></app-testing>
+
+
+
+</div>

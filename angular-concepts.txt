@@ -1,0 +1,50 @@
+
+Angular concepts
+ 
+Hot Module Replacment
+
+component decorators
+module decorators
+
+{{}} - string interpolation (passing variable from component to view)
+
+one way data binding
+- value can change in component and cannot change in view.
+
+Two day data binding
+- value can be change in both component and view.
+
+property binding
+event binding
+
+Directives - changes behaviours, layout or appearance of elements
+- component
+- structural - (ngIf,ngFor and ngSwitch) * symbol is mandatory and its represent structural directives
+- attribute - (ngClass,ngStyle)
+
+pipes
+Pipes are simple functions to use in template expressions to accept an 
+input value and return a transformed value
+- Date pipe
+- lowercase pipe
+- uppercase pipe
+- currency pipe
+- decimal pipe
+- percent pipe
+
+Lifecycle hooks
+- ngOnChanges - it supports and find any changes in string only. It doesn't support array or objects.
+- ngOnInit - Called once, after the first ngOnChanges()
+- ngDoCheck - Called immediately after ngOnChanges(), it supports and find any changes in array or object
+- ngAfterContent
+- ngAfterContentChecked()
+- ngAfterViewInit
+- ngAfterViewChecked
+- ngOnDestroy - If the component destroy, it will called.
+
+
+Angular Forms
+- Reactive Forms 
+- Template Driven
+
+ngNativeValidate is for html validation
