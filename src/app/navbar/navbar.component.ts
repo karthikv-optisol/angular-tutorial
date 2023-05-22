@@ -1,18 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  navbar =false;
+  showMenu =false;
+  isLoggedIn = false;
 
-  handleNavbar()
+  ngOnInit():void
+  {
+    if(localStorage.getItem("token"))
+    {
+      this.isLoggedIn = true;
+    }
+  }
+
+  toggleNavbar()
   {
    
-     this.navbar = !this.navbar;
-     console.log("clicked",this.navbar);
+     this.showMenu = !this.showMenu;
+     console.log("clicked",this.showMenu);
+  }
+
+  handleLogout()
+  {
+     localStorage.clear();
+     location.reload();
   }
 }

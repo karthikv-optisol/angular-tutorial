@@ -11,6 +11,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -22,6 +23,7 @@ import { LoginComponent } from './login/login.component';
     ProductsComponent,
     NavbarComponent,
     LoginComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
