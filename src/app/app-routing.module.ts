@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-  { path: '', component: TemplateDrivenFormComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: '', component: ProductsComponent },
+  {path:'login',component:LoginComponent},
+  { path: 'register', component: TemplateDrivenFormComponent },
   { path: 'product/:id', component: ProductComponent }
 ];
 

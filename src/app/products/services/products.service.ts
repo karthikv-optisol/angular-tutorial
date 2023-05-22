@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 
-const API = 'https://api.escuelajs.co/api/v1/';
+const API = 'https://fakestoreapi.com/';
 
 @Injectable({
   providedIn: 'root'
