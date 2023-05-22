@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { NgControl, NgForm,FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-template-driven-form',
