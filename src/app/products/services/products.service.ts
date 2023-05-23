@@ -26,4 +26,24 @@ export class ProductsService {
   getProduct(URL:any): Observable<any>{
     return this.http.get(API+URL);
   }
+
+  addToCart(URL:any,data:any)
+  {
+    return this.http.post(API+URL,data);
+  }
+
+  getUserCart(URL:any)
+  {
+    return this.http.get(API+URL);
+  }
+
+  getCategory(URL:any)
+  {
+      return this.http.get(API+URL);
+  }
+
+  getCategoryProduct(URL:any)
+  {
+    return this.http.get(API+URL);
+  }
 }

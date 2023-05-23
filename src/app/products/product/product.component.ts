@@ -12,6 +12,7 @@ export class ProductComponent {
   page_id: any;
 
   products:any;
+  quantity:number=1;
 
   constructor(private route: ActivatedRoute,private productService:ProductsService) {
 
@@ -28,5 +29,35 @@ export class ProductComponent {
       }
     })
      
+  }
+
+  increaseQuantity()
+  {
+    if(this.quantity>0)
+    {
+      this.quantity++;
+    }
+    
+  }
+  decreaseQuantity()
+  {
+    if(this.quantity>0)
+    {
+      this.quantity--;
+    }
+  }
+
+  addToCart(product:any)
+  {
+      // console.log("product",product);
+      let data = {
+        userId:1,
+        date:new Date(),
+        products:[{productId:product.id,quantity:this.quantity}]
+      }
+
+      this.productService.addToCart('carts',data).subscribe((result)=>{
+        console.log("results",result);
+      })
   }
 }

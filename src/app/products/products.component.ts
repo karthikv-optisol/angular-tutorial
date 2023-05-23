@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import {products} from "../models/Products"
+import { Component, OnInit } from '@angular/core';
+import { products } from "../models/Products"
 import { ProductsService } from './services/products.service';
 
 @Component({
@@ -9,18 +9,49 @@ import { ProductsService } from './services/products.service';
 })
 export class ProductsComponent {
 
-  constructor(private productsService:ProductsService)
-  {
+  constructor(private productsService: ProductsService) {
 
   }
 
-  products:any=[];
-  
+  products: any = [];
+  categories:any = [];
+
   ngOnInit() {
-   this.productsService.getProducts('products').subscribe((data)=>{
-      // console.log("data",data);
+
+    this.getProducts();
+    this.getCategory();
+  }
+
+  getCategory() {
+    this.productsService.getCategory('products/categories').subscribe((data) => {
+      console.log("data", data);
       if(data)
       {
+        this.categories = data;
+      }
+    });
+  }
+
+  getCategoryProducts(event:any)
+  {
+      // console.log(event.target.value,"event");
+      let category = event.target.value;
+
+      if(category)
+      {
+        this.productsService.getCategoryProduct('products/category/'+category).subscribe((data)=>{
+          if(data)
+          {
+            this.products = data;
+          }
+        })
+      }
+  }
+
+  getProducts() {
+    this.productsService.getProducts('products').subscribe((data) => {
+      // console.log("data",data);
+      if (data) {
         this.products = data;
       }
     })
