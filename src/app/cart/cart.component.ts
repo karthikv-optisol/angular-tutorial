@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products/services/products.service';
 
 @Component({
@@ -7,46 +7,61 @@ import { ProductsService } from '../products/services/products.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  constructor(private productService:ProductsService)
-  {
+  constructor(private productService: ProductsService) {
 
   }
-  cartProducts!:any[];
-
-  ngOnInit():void
-  {
-      this.getCart()
+  cartProducts!: any[];
+  Products!: any[];
+  cartEmpty: boolean = false;
+  isLoading:boolean = false;
+  ngOnInit(): void {
+    this.getCart()   
   }
 
-  getCart(){
-
-    this.productService.getUserCart('carts/user/1')
-    .subscribe((result:any)=>{
-      // console.log(result,"results");
-      if(result)
-      {
-        result.forEach((element:any) => {
-            // console.log(element.products,"element");
-            element.products.forEach((product:any) => {
-             this.getProduct(product.productId,product.quantity);
+  getCart() {
+    let productId: any = [];
+    let products: any = [];
+    let quantity:any =[];
+    this.isLoading = true;
+    this.productService.getUserCart('carts/user/2')
+      .subscribe((result: any) => {
+        // console.log(result,"results");
+        if (result) {
+          result.forEach((element: any) => {
+            // console.log("element",element.products);
+            element.products.forEach((pid: any) => {
+              // console.log("pid",pid);
+              productId.push(pid.productId);
+              quantity.push(pid.quantity);
             });
           });
-          console.log("cartproducts",this.cartProducts);
-      }
-    });
+          this.cartProducts = productId;
+
+          this.productService.getProducts('products').subscribe((data) => {
+            
+            if (data) {
+              data && data.forEach((element: any) => {
+                // console.log("element",element);
+                productId && productId.forEach((pid: any,i:number) => {
+                  if (pid == element.id) {
+                    element.quantity = quantity[i];
+                    products.push(element)
+                  }
+                })
+              });
+             
+              
+            }
+          })
+        }
+        console.log(products,"products")
+        this.Products = products;
+        this.isLoading = false;
+      },
+        ((error: any) => {
+          this.cartEmpty = true;
+        })
+      );
   }
-  getProduct(productId:number,quantity:number)
-  {
-      let result:any = this.productService.getProduct('products/'+productId).subscribe((data)=>{
-        return data;
-      })
-
-      this.cartProducts=result;
-
-      console.log("result",result);
-
-      // console.log("cartProducts",this.cartProducts)
-
-      return result;
-  }
+  
 }

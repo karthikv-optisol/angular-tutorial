@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductsService } from '../services/products.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product',
@@ -13,13 +14,19 @@ export class ProductComponent {
 
   products:any;
   quantity:number=1;
+  isLoading:boolean=false;
 
   constructor(private route: ActivatedRoute,private productService:ProductsService) {
 
   }
   ngOnInit() {
-    let params = this.route.snapshot.params['id'];
+    this.getProduct();
+  }
 
+  getProduct()
+  {
+    let params = this.route.snapshot.params['id'];
+    this.isLoading = true;
     this.productService.getProduct('products/'+params)
     .subscribe(data=>{
       // console.log(data);
@@ -27,8 +34,8 @@ export class ProductComponent {
       {
         this.products = data;
       }
+      this.isLoading = false;
     })
-     
   }
 
   increaseQuantity()
@@ -57,7 +64,13 @@ export class ProductComponent {
       }
 
       this.productService.addToCart('carts',data).subscribe((result)=>{
-        console.log("results",result);
+        if(result)
+        {
+          Swal.fire({
+            title:'Product added successfully',
+            timer:2000
+          })
+        }
       })
   }
 }
